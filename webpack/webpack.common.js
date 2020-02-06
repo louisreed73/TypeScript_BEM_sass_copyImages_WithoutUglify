@@ -7,7 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-        bundle: './src/assets/js/index.js'
+        bundle: './src/assets/ts/index.ts'
     //    home: './src/assets/js/home.js',
 
 
@@ -31,6 +31,11 @@ module.exports = {
                     publicPath: "/"
                 }
             },  */
+            {
+                test:/\.tsx?$/,
+                use:"ts-loader",
+                exclude:/node_modules/
+            },
             {
                 test: /\.s?css$/,
                 use: [
@@ -100,6 +105,9 @@ module.exports = {
 
         ]
     },
+    resolve:{
+        extensions:['.ts', '.js']
+    },
     plugins: [
         new HtmlWebpackPlugin({
             filename: "index.html", template: "./src/index.html",
@@ -129,6 +137,7 @@ module.exports = {
 
 
         new MiniCssExtractPlugin({filename: "assets/css/[name].css"})
+
 
     ]
 }

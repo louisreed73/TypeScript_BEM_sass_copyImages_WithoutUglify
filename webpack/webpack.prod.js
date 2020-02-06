@@ -1,7 +1,8 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
-const uglify=require('uglifyjs-webpack-plugin');
 const OptimizeCssAssets=require('optimize-css-assets-webpack-plugin');
+const MinifyPlugin = require("babel-minify-webpack-plugin");
+
 
 function recursiveIssuer(m) {
     if (m.issuer) {
@@ -39,8 +40,9 @@ module.exports = merge(common, {
             },
         },
         minimizer:[
-            new uglify(),
             new OptimizeCssAssets(),
+        new MinifyPlugin()
+
         ]
     },
 
